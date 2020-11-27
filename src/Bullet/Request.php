@@ -69,17 +69,6 @@ class Request
      */
     public function __construct($method = null, $path = null, array $params = array(), array $headers = array(), $rawBody = null)
     {
-        // Die magic_quotes, just die...
-        if(get_magic_quotes_gpc()) {
-            $stripslashes_gpc = function(&$value, $key) {
-                $value = stripslashes($value);
-            };
-            array_walk_recursive($_GET, $stripslashes_gpc);
-            array_walk_recursive($_POST, $stripslashes_gpc);
-            array_walk_recursive($_COOKIE, $stripslashes_gpc);
-            array_walk_recursive($_REQUEST, $stripslashes_gpc);
-        }
-
         $this->_postParams = $_POST;
         $this->_queryParams = $_GET;
 
